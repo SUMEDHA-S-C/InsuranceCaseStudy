@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsuranceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_participants">
+    <Key>
+      <PropertyRef Name="participantNo" />
+    </Key>
+    <Property Name="participantNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" />
+    <Property Name="middleName" Type="varchar" MaxLength="50" />
+    <Property Name="dob" Type="date" />
+    <Property Name="participantTypeNo" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_participantType">
+    <Key>
+      <PropertyRef Name="participantTypeNo" />
+    </Key>
+    <Property Name="participantTypeNo" Type="int" Nullable="false" />
+    <Property Name="praticipantTypeName" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tbl_policies">
+    <Key>
+      <PropertyRef Name="PolicyNumber" />
+    </Key>
+    <Property Name="PolicyNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlanNumber" Type="int" />
+    <Property Name="InstallementPremium" Type="float" />
+    <Property Name="Insured" Type="varchar" MaxLength="50" />
+    <Property Name="SumAssured" Type="float" />
+    <Property Name="PolicyStatus" Type="varchar" MaxLength="10" />
+    <Property Name="PremiumMode" Type="varchar" MaxLength="10" />
+    <Property Name="PremiumDueDate" Type="date" />
+    <Property Name="Beneficiary" Type="varchar" MaxLength="50" />
+    <Property Name="Owner" Type="varchar" MaxLength="50" />
+    <Property Name="PolicyTerm" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tbl_policyType">
+    <Key>
+      <PropertyRef Name="PlanNumber" />
+    </Key>
+    <Property Name="PlanNumber" Type="int" Nullable="false" />
+    <Property Name="PolicyName" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK__Policies__Benefi__38996AB5">
+    <End Role="tbl_policyType" Type="Self.tbl_policyType" Multiplicity="0..1" />
+    <End Role="tbl_policies" Type="Self.tbl_policies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_policyType">
+        <PropertyRef Name="PlanNumber" />
+      </Principal>
+      <Dependent Role="tbl_policies">
+        <PropertyRef Name="PlanNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_participantType">
+    <End Role="tbl_participantType" Type="Self.tbl_participantType" Multiplicity="0..1" />
+    <End Role="tbl_participants" Type="Self.tbl_participants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_participantType">
+        <PropertyRef Name="participantTypeNo" />
+      </Principal>
+      <Dependent Role="tbl_participants">
+        <PropertyRef Name="participantTypeNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="usp_addParticipant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="firstname" Type="varchar" Mode="In" />
+    <Parameter Name="lastname" Type="varchar" Mode="In" />
+    <Parameter Name="middlename" Type="varchar" Mode="In" />
+    <Parameter Name="dob" Type="date" Mode="In" />
+    <Parameter Name="participantTypeNo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_beneficiary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_insured" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_owner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="USP_POLOCIES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="policyno" Type="int" Mode="In" />
+    <Parameter Name="planno" Type="varchar" Mode="In" />
+    <Parameter Name="installement" Type="float" Mode="In" />
+    <Parameter Name="insured" Type="varchar" Mode="In" />
+    <Parameter Name="assured" Type="float" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="mode" Type="varchar" Mode="In" />
+    <Parameter Name="due" Type="date" Mode="In" />
+    <Parameter Name="benfit" Type="varchar" Mode="In" />
+    <Parameter Name="Action" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_updateParticipantDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="firstname" Type="varchar" Mode="In" />
+    <Parameter Name="lastname" Type="varchar" Mode="In" />
+    <Parameter Name="middlename" Type="varchar" Mode="In" />
+    <Parameter Name="dob" Type="date" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_viewParticipant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="InsuranceModelStoreContainer">
+    <EntitySet Name="tbl_participants" EntityType="Self.tbl_participants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_participantType" EntityType="Self.tbl_participantType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_policies" EntityType="Self.tbl_policies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_policyType" EntityType="Self.tbl_policyType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Policies__Benefi__38996AB5" Association="Self.FK__Policies__Benefi__38996AB5">
+      <End Role="tbl_policyType" EntitySet="tbl_policyType" />
+      <End Role="tbl_policies" EntitySet="tbl_policies" />
+    </AssociationSet>
+    <AssociationSet Name="fk_participantType" Association="Self.fk_participantType">
+      <End Role="tbl_participantType" EntitySet="tbl_participantType" />
+      <End Role="tbl_participants" EntitySet="tbl_participants" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

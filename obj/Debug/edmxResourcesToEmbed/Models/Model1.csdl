@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsuranceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_participants">
+    <Key>
+      <PropertyRef Name="participantNo" />
+    </Key>
+    <Property Name="participantNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="middleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="participantTypeNo" Type="Int32" />
+    <NavigationProperty Name="tbl_participantType" Relationship="Self.fk_participantType" FromRole="tbl_participants" ToRole="tbl_participantType" />
+  </EntityType>
+  <EntityType Name="tbl_participantType">
+    <Key>
+      <PropertyRef Name="participantTypeNo" />
+    </Key>
+    <Property Name="participantTypeNo" Type="Int32" Nullable="false" />
+    <Property Name="praticipantTypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_participants" Relationship="Self.fk_participantType" FromRole="tbl_participantType" ToRole="tbl_participants" />
+  </EntityType>
+  <EntityType Name="tbl_policies">
+    <Key>
+      <PropertyRef Name="PolicyNumber" />
+    </Key>
+    <Property Name="PolicyNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PlanNumber" Type="Int32" />
+    <Property Name="InstallementPremium" Type="Double" />
+    <Property Name="Insured" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SumAssured" Type="Double" />
+    <Property Name="PolicyStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PremiumMode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PremiumDueDate" Type="DateTime" Precision="0" />
+    <Property Name="Beneficiary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Owner" Type="String" />
+    <Property Name="PolicyTerm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_policyType" Relationship="Self.FK__Policies__Benefi__38996AB5" FromRole="tbl_policies" ToRole="tbl_policyType" />
+  </EntityType>
+  <EntityType Name="tbl_policyType">
+    <Key>
+      <PropertyRef Name="PlanNumber" />
+    </Key>
+    <Property Name="PlanNumber" Type="Int32" Nullable="false" />
+    <Property Name="PolicyName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_policies" Relationship="Self.FK__Policies__Benefi__38996AB5" FromRole="tbl_policyType" ToRole="tbl_policies" />
+  </EntityType>
+  <Association Name="fk_participantType">
+    <End Role="tbl_participantType" Type="Self.tbl_participantType" Multiplicity="0..1" />
+    <End Role="tbl_participants" Type="Self.tbl_participants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_participantType">
+        <PropertyRef Name="participantTypeNo" />
+      </Principal>
+      <Dependent Role="tbl_participants">
+        <PropertyRef Name="participantTypeNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Policies__Benefi__38996AB5">
+    <End Role="tbl_policyType" Type="Self.tbl_policyType" Multiplicity="0..1" />
+    <End Role="tbl_policies" Type="Self.tbl_policies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_policyType">
+        <PropertyRef Name="PlanNumber" />
+      </Principal>
+      <Dependent Role="tbl_policies">
+        <PropertyRef Name="PlanNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InsuranceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_participants" EntityType="Self.tbl_participants" />
+    <EntitySet Name="tbl_participantType" EntityType="Self.tbl_participantType" />
+    <EntitySet Name="tbl_policies" EntityType="Self.tbl_policies" />
+    <EntitySet Name="tbl_policyType" EntityType="Self.tbl_policyType" />
+    <AssociationSet Name="fk_participantType" Association="Self.fk_participantType">
+      <End Role="tbl_participantType" EntitySet="tbl_participantType" />
+      <End Role="tbl_participants" EntitySet="tbl_participants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Policies__Benefi__38996AB5" Association="Self.FK__Policies__Benefi__38996AB5">
+      <End Role="tbl_policyType" EntitySet="tbl_policyType" />
+      <End Role="tbl_policies" EntitySet="tbl_policies" />
+    </AssociationSet>
+    <FunctionImport Name="usp_addParticipant">
+      <Parameter Name="firstname" Mode="In" Type="String" />
+      <Parameter Name="lastname" Mode="In" Type="String" />
+      <Parameter Name="middlename" Mode="In" Type="String" />
+      <Parameter Name="dob" Mode="In" Type="DateTime" />
+      <Parameter Name="participantTypeNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="USP_POLOCIES">
+      <Parameter Name="policyno" Mode="In" Type="Int32" />
+      <Parameter Name="planno" Mode="In" Type="String" />
+      <Parameter Name="installement" Mode="In" Type="Double" />
+      <Parameter Name="insured" Mode="In" Type="String" />
+      <Parameter Name="assured" Mode="In" Type="Double" />
+      <Parameter Name="status" Mode="In" Type="String" />
+      <Parameter Name="mode" Mode="In" Type="String" />
+      <Parameter Name="due" Mode="In" Type="DateTime" />
+      <Parameter Name="benfit" Mode="In" Type="String" />
+      <Parameter Name="Action" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_updateParticipantDetails">
+      <Parameter Name="firstname" Mode="In" Type="String" />
+      <Parameter Name="lastname" Mode="In" Type="String" />
+      <Parameter Name="middlename" Mode="In" Type="String" />
+      <Parameter Name="dob" Mode="In" Type="DateTime" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_viewParticipant" />
+    <FunctionImport Name="usp_beneficiary" ReturnType="Collection(String)" />
+    <FunctionImport Name="usp_insured" ReturnType="Collection(String)" />
+    <FunctionImport Name="usp_owner" ReturnType="Collection(String)" />
+  </EntityContainer>
+</Schema>

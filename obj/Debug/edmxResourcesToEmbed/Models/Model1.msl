@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InsuranceModelStoreContainer" CdmEntityContainer="InsuranceEntities">
+    <EntitySetMapping Name="tbl_participants">
+      <EntityTypeMapping TypeName="InsuranceModel.tbl_participants">
+        <MappingFragment StoreEntitySet="tbl_participants">
+          <ScalarProperty Name="participantNo" ColumnName="participantNo" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="middleName" ColumnName="middleName" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="participantTypeNo" ColumnName="participantTypeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_participantType">
+      <EntityTypeMapping TypeName="InsuranceModel.tbl_participantType">
+        <MappingFragment StoreEntitySet="tbl_participantType">
+          <ScalarProperty Name="participantTypeNo" ColumnName="participantTypeNo" />
+          <ScalarProperty Name="praticipantTypeName" ColumnName="praticipantTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_policies">
+      <EntityTypeMapping TypeName="InsuranceModel.tbl_policies">
+        <MappingFragment StoreEntitySet="tbl_policies">
+          <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+          <ScalarProperty Name="PlanNumber" ColumnName="PlanNumber" />
+          <ScalarProperty Name="InstallementPremium" ColumnName="InstallementPremium" />
+          <ScalarProperty Name="Insured" ColumnName="Insured" />
+          <ScalarProperty Name="SumAssured" ColumnName="SumAssured" />
+          <ScalarProperty Name="PolicyStatus" ColumnName="PolicyStatus" />
+          <ScalarProperty Name="PremiumMode" ColumnName="PremiumMode" />
+          <ScalarProperty Name="PremiumDueDate" ColumnName="PremiumDueDate" />
+          <ScalarProperty Name="Beneficiary" ColumnName="Beneficiary" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="PolicyTerm" ColumnName="PolicyTerm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_policyType">
+      <EntityTypeMapping TypeName="InsuranceModel.tbl_policyType">
+        <MappingFragment StoreEntitySet="tbl_policyType">
+          <ScalarProperty Name="PlanNumber" ColumnName="PlanNumber" />
+          <ScalarProperty Name="PolicyName" ColumnName="PolicyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_addParticipant" FunctionName="InsuranceModel.Store.usp_addParticipant" />
+    <FunctionImportMapping FunctionImportName="USP_POLOCIES" FunctionName="InsuranceModel.Store.USP_POLOCIES" />
+    <FunctionImportMapping FunctionImportName="usp_updateParticipantDetails" FunctionName="InsuranceModel.Store.usp_updateParticipantDetails" />
+    <FunctionImportMapping FunctionImportName="usp_viewParticipant" FunctionName="InsuranceModel.Store.usp_viewParticipant" />
+    <FunctionImportMapping FunctionImportName="usp_beneficiary" FunctionName="InsuranceModel.Store.usp_beneficiary" />
+    <FunctionImportMapping FunctionImportName="usp_insured" FunctionName="InsuranceModel.Store.usp_insured" />
+    <FunctionImportMapping FunctionImportName="usp_owner" FunctionName="InsuranceModel.Store.usp_owner" />
+  </EntityContainerMapping>
+</Mapping>
