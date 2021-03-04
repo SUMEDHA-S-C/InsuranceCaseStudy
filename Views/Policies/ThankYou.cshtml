@@ -1,7 +1,42 @@
-﻿
+﻿@model Insurance.Models.tbl_policies
 @{
-    ViewBag.Title = "ThankYou";
+    Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
-<h2>ThankYou</h2>
+    @{
+        double sumAuured = @Convert.ToDouble(@Session["sumAssured"]);
+        int term = Convert.ToInt32(Session["policyTerm"]);
+        int planNumber = Convert.ToInt32(Session["PlanNumber"]);
+        string owner = Session["owner"].ToString();
+        string insured = Session["insured"].ToString();
+        string benificiary = Session["benificiary"].ToString();
+        double installmentPremium = Convert.ToDouble(Session["premium"]);
+
+        double bonus = 0.0;
+        double maturityAmount = 0.0;
+        double deathBenifit = 0.0;
+    }
+
+    @if (planNumber == 1)
+    {
+        bonus = sumAuured * 0.03 * term;
+        maturityAmount = sumAuured + bonus;
+        deathBenifit = sumAuured;
+    }
+
+    else if (planNumber == 2)
+    {
+        maturityAmount = sumAuured;
+        deathBenifit = sumAuured * 2;
+    }
+    <div class="report-content">
+        <h2>Insurance Report</h2>
+        <hr />
+        <p>Owner : @owner</p>
+        <p>Insured : @insured</p>
+        <p>Benificiary : @benificiary</p>
+        <p>Installment Premium : INR @installmentPremium/-</p>
+        <p>Maturity value : INR @maturityAmount/-</p>
+        <p>Death Benifit : .INR @deathBenifit/-</p>
+    </div>
 

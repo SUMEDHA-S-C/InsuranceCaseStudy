@@ -1,0 +1,43 @@
+﻿body {
+    background: #28527a;
+    color: #fff;
+}
+
+.form-title {
+    text-align: center;
+}
+
+.wrapper{
+    width: 50%;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-control,
+.form-select{
+    margin-bottom: 20px;
+}
+
+.btn-primary{
+    width: 97%;
+}
+
+.report-content {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.bg-color{
+    background: #ccc;
+}
+
+#icon {
+    height: 50px;
+    width: 75px;
+    padding:0;
+}

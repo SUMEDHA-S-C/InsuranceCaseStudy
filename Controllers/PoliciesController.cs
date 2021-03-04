@@ -49,9 +49,24 @@ namespace Insurance.Controllers
 
             if (ModelState.IsValid)
             {
-                ds.tbl_policies.Add(policies);
-                ds.SaveChanges();
-                return RedirectToAction("ThankYou");
+                try
+                {
+                    ds.tbl_policies.Add(policies);
+                    ds.SaveChanges();
+                    Session["sumAssured"] = Convert.ToDouble(policies.SumAssured);
+                    Session["planNumber"] = Convert.ToInt32(policies.PlanNumber);
+                    Session["policyTerm"] = Convert.ToInt32(policies.PolicyTerm);
+                    Session["owner"] = policies.Owner.ToString();
+                    Session["insured"] = policies.Insured.ToString();
+                    Session["benificiary"] = policies.Beneficiary.ToString();
+                    Session["premium"] = Convert.ToDouble(policies.InstallementPremium);
+
+                    return RedirectToAction("ThankYou", policies);
+                }
+                catch
+                {
+                    return View(policies);
+                } 
             }
             else
                 return View(policies);

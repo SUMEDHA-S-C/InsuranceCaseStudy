@@ -10,6 +10,7 @@ namespace Insurance.Controllers
     {
         public ActionResult Index()
         {
+            Session.Clear();
             return View();
         }
 
