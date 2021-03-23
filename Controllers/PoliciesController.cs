@@ -14,7 +14,7 @@ namespace Insurance.Controllers
         public ActionResult ShowDetails()
         {
             var db = new InsuranceEntities();
-            var PolicyTypes = db.tbl_policyType.ToList();
+            var PolicyTypes = db.tbl_policies.ToList();
             return View(PolicyTypes);
         }
 
@@ -51,8 +51,7 @@ namespace Insurance.Controllers
             {
                 try
                 {
-                    ds.tbl_policies.Add(policies);
-                    ds.SaveChanges();
+                    ds.usp_addPolicies(policies.PolicyNumber, policies.PlanNumber, policies.InstallementPremium, policies.Insured, policies.SumAssured, policies.PolicyStatus, policies.PremiumMode, policies.PremiumDueDate, policies.Beneficiary, policies.Owner, policies.PolicyTerm);
                     Session["sumAssured"] = Convert.ToDouble(policies.SumAssured);
                     Session["planNumber"] = Convert.ToInt32(policies.PlanNumber);
                     Session["policyTerm"] = Convert.ToInt32(policies.PolicyTerm);
@@ -75,6 +74,50 @@ namespace Insurance.Controllers
         public ActionResult ThankYou()
         {
             return View();
+        }
+
+        public ActionResult Update(int id)
+        {
+            using(var ds = new InsuranceEntities())
+            {
+                var data = ds.tbl_policies.Where(x => x.PolicyNumber == id).SingleOrDefault();
+                if(data != null)
+                {
+                    return View(data);
+                }
+                else
+                    return View();
+            } 
+        }
+
+        [HttpPost]
+        public ActionResult Update(int id, tbl_policies policy)
+        {
+            using(var ds = new InsuranceEntities())
+            {
+                try
+                {
+                    var data = ds.tbl_policies.Where(x => x.PolicyNumber == id).SingleOrDefault();
+                    //data.PremiumMode = policy.PremiumMode;
+                    data.PremiumDueDate = policy.PremiumDueDate;
+                    data.PolicyStatus = policy.PolicyStatus;
+                    ds.SaveChanges();
+                    return RedirectToAction("ShowDetails");
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            using( var ds = new InsuranceEntities())
+            {
+                ds.usp_deletePolicy(id);
+                return RedirectToAction("ShowDetails");
+            }
         }
     }
 }

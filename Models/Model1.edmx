@@ -77,27 +77,47 @@
           <Parameter Name="dob" Type="date" Mode="In" />
           <Parameter Name="participantTypeNo" Type="int" Mode="In" />
         </Function>
-        <Function Name="usp_beneficiary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="usp_insured" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="usp_owner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="USP_POLOCIES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="usp_addPolicies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="policyno" Type="int" Mode="In" />
-          <Parameter Name="planno" Type="varchar" Mode="In" />
+          <Parameter Name="planno" Type="int" Mode="In" />
           <Parameter Name="installement" Type="float" Mode="In" />
           <Parameter Name="insured" Type="varchar" Mode="In" />
-          <Parameter Name="assured" Type="float" Mode="In" />
-          <Parameter Name="status" Type="varchar" Mode="In" />
-          <Parameter Name="mode" Type="varchar" Mode="In" />
-          <Parameter Name="due" Type="date" Mode="In" />
-          <Parameter Name="benfit" Type="varchar" Mode="In" />
-          <Parameter Name="Action" Type="varchar" Mode="In" />
+          <Parameter Name="sumassured" Type="float" Mode="In" />
+          <Parameter Name="policystatus" Type="varchar" Mode="In" />
+          <Parameter Name="premiummode" Type="varchar" Mode="In" />
+          <Parameter Name="premiumduedate" Type="date" Mode="In" />
+          <Parameter Name="benfitiary" Type="varchar" Mode="In" />
+          <Parameter Name="owner" Type="varchar" Mode="In" />
+          <Parameter Name="policyterm" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="usp_beneficiary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_deletePolicy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_getPolicyById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_insured" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_owner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_updateParticipantDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="firstname" Type="varchar" Mode="In" />
           <Parameter Name="lastname" Type="varchar" Mode="In" />
           <Parameter Name="middlename" Type="varchar" Mode="In" />
           <Parameter Name="dob" Type="date" Mode="In" />
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_updatePolicies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="policyno" Type="int" Mode="In" />
+          <Parameter Name="planno" Type="int" Mode="In" />
+          <Parameter Name="installement" Type="float" Mode="In" />
+          <Parameter Name="insured" Type="varchar" Mode="In" />
+          <Parameter Name="sumassured" Type="float" Mode="In" />
+          <Parameter Name="policystatus" Type="varchar" Mode="In" />
+          <Parameter Name="premiummode" Type="varchar" Mode="In" />
+          <Parameter Name="premiumduedate" Type="date" Mode="In" />
+          <Parameter Name="benfitiary" Type="varchar" Mode="In" />
+          <Parameter Name="owner" Type="varchar" Mode="In" />
+          <Parameter Name="policyterm" Type="varchar" Mode="In" />
         </Function>
         <Function Name="usp_viewParticipant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="InsuranceModelStoreContainer">
@@ -151,7 +171,7 @@
           <Property Name="PremiumMode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="PremiumDueDate" Type="DateTime" Precision="0" />
           <Property Name="Beneficiary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Owner" Type="String" />
+          <Property Name="Owner" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="PolicyTerm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tbl_policyType" Relationship="Self.FK__Policies__Benefi__38996AB5" FromRole="tbl_policies" ToRole="tbl_policyType" />
         </EntityType>
@@ -230,7 +250,87 @@
           <FunctionImport Name="usp_beneficiary" ReturnType="Collection(String)" />
           <FunctionImport Name="usp_insured" ReturnType="Collection(String)" />
           <FunctionImport Name="usp_owner" ReturnType="Collection(String)" />
+          <FunctionImport Name="usp_createPolicies" ReturnType="Collection(InsuranceModel.usp_createPolicies_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_deletePolicies">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_getPolicies" ReturnType="Collection(InsuranceModel.usp_getPolicies_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_addPolicies">
+            <Parameter Name="policyno" Mode="In" Type="Int32" />
+            <Parameter Name="planno" Mode="In" Type="Int32" />
+            <Parameter Name="installement" Mode="In" Type="Double" />
+            <Parameter Name="insured" Mode="In" Type="String" />
+            <Parameter Name="sumassured" Mode="In" Type="Double" />
+            <Parameter Name="policystatus" Mode="In" Type="String" />
+            <Parameter Name="premiummode" Mode="In" Type="String" />
+            <Parameter Name="premiumduedate" Mode="In" Type="DateTime" />
+            <Parameter Name="benfitiary" Mode="In" Type="String" />
+            <Parameter Name="owner" Mode="In" Type="String" />
+            <Parameter Name="policyterm" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_deletePolicy">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_getPolicyById" ReturnType="Collection(InsuranceModel.usp_getPolicyById_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_updatePolicies">
+            <Parameter Name="policyno" Mode="In" Type="Int32" />
+            <Parameter Name="planno" Mode="In" Type="Int32" />
+            <Parameter Name="installement" Mode="In" Type="Double" />
+            <Parameter Name="insured" Mode="In" Type="String" />
+            <Parameter Name="sumassured" Mode="In" Type="Double" />
+            <Parameter Name="policystatus" Mode="In" Type="String" />
+            <Parameter Name="premiummode" Mode="In" Type="String" />
+            <Parameter Name="premiumduedate" Mode="In" Type="DateTime" />
+            <Parameter Name="benfitiary" Mode="In" Type="String" />
+            <Parameter Name="owner" Mode="In" Type="String" />
+            <Parameter Name="policyterm" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="usp_createPolicies_Result">
+          <Property Type="Int32" Name="PolicyNumber" Nullable="false" />
+          <Property Type="Int32" Name="PlanNumber" Nullable="true" />
+          <Property Type="Double" Name="InstallementPremium" Nullable="true" />
+          <Property Type="String" Name="Insured" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="SumAssured" Nullable="true" />
+          <Property Type="String" Name="PolicyStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PremiumMode" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="PremiumDueDate" Nullable="true" />
+          <Property Type="String" Name="Beneficiary" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PolicyTerm" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="usp_getPolicies_Result">
+          <Property Type="Int32" Name="PolicyNumber" Nullable="false" />
+          <Property Type="Int32" Name="PlanNumber" Nullable="true" />
+          <Property Type="Double" Name="InstallementPremium" Nullable="true" />
+          <Property Type="String" Name="Insured" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="SumAssured" Nullable="true" />
+          <Property Type="String" Name="PolicyStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PremiumMode" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="PremiumDueDate" Nullable="true" />
+          <Property Type="String" Name="Beneficiary" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PolicyTerm" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="usp_getPolicyById_Result">
+          <Property Type="Int32" Name="PolicyNumber" Nullable="false" />
+          <Property Type="Int32" Name="PlanNumber" Nullable="true" />
+          <Property Type="Double" Name="InstallementPremium" Nullable="true" />
+          <Property Type="String" Name="Insured" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="SumAssured" Nullable="true" />
+          <Property Type="String" Name="PolicyStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PremiumMode" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="PremiumDueDate" Nullable="true" />
+          <Property Type="String" Name="Beneficiary" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PolicyTerm" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -283,13 +383,32 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_addParticipant" FunctionName="InsuranceModel.Store.usp_addParticipant" />
-          <FunctionImportMapping FunctionImportName="USP_POLOCIES" FunctionName="InsuranceModel.Store.USP_POLOCIES" />
           <FunctionImportMapping FunctionImportName="usp_updateParticipantDetails" FunctionName="InsuranceModel.Store.usp_updateParticipantDetails" />
           <FunctionImportMapping FunctionImportName="usp_viewParticipant" FunctionName="InsuranceModel.Store.usp_viewParticipant" />
           <FunctionImportMapping FunctionImportName="usp_beneficiary" FunctionName="InsuranceModel.Store.usp_beneficiary" />
           <FunctionImportMapping FunctionImportName="usp_insured" FunctionName="InsuranceModel.Store.usp_insured" />
           <FunctionImportMapping FunctionImportName="usp_owner" FunctionName="InsuranceModel.Store.usp_owner" />
-        </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="usp_addPolicies" FunctionName="InsuranceModel.Store.usp_addPolicies" />
+          <FunctionImportMapping FunctionImportName="usp_deletePolicy" FunctionName="InsuranceModel.Store.usp_deletePolicy" />
+          <FunctionImportMapping FunctionImportName="usp_getPolicyById" FunctionName="InsuranceModel.Store.usp_getPolicyById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InsuranceModel.usp_getPolicyById_Result">
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="PlanNumber" ColumnName="PlanNumber" />
+                <ScalarProperty Name="InstallementPremium" ColumnName="InstallementPremium" />
+                <ScalarProperty Name="Insured" ColumnName="Insured" />
+                <ScalarProperty Name="SumAssured" ColumnName="SumAssured" />
+                <ScalarProperty Name="PolicyStatus" ColumnName="PolicyStatus" />
+                <ScalarProperty Name="PremiumMode" ColumnName="PremiumMode" />
+                <ScalarProperty Name="PremiumDueDate" ColumnName="PremiumDueDate" />
+                <ScalarProperty Name="Beneficiary" ColumnName="Beneficiary" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="PolicyTerm" ColumnName="PolicyTerm" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_updatePolicies" FunctionName="InsuranceModel.Store.usp_updatePolicies" />
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

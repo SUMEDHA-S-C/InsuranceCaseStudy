@@ -33,7 +33,7 @@
     <Property Name="PremiumMode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="PremiumDueDate" Type="DateTime" Precision="0" />
     <Property Name="Beneficiary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Owner" Type="String" />
+    <Property Name="Owner" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="PolicyTerm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tbl_policyType" Relationship="Self.FK__Policies__Benefi__38996AB5" FromRole="tbl_policies" ToRole="tbl_policyType" />
   </EntityType>
@@ -112,5 +112,85 @@
     <FunctionImport Name="usp_beneficiary" ReturnType="Collection(String)" />
     <FunctionImport Name="usp_insured" ReturnType="Collection(String)" />
     <FunctionImport Name="usp_owner" ReturnType="Collection(String)" />
+    <FunctionImport Name="usp_createPolicies" ReturnType="Collection(InsuranceModel.usp_createPolicies_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_deletePolicies">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_getPolicies" ReturnType="Collection(InsuranceModel.usp_getPolicies_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_addPolicies">
+      <Parameter Name="policyno" Mode="In" Type="Int32" />
+      <Parameter Name="planno" Mode="In" Type="Int32" />
+      <Parameter Name="installement" Mode="In" Type="Double" />
+      <Parameter Name="insured" Mode="In" Type="String" />
+      <Parameter Name="sumassured" Mode="In" Type="Double" />
+      <Parameter Name="policystatus" Mode="In" Type="String" />
+      <Parameter Name="premiummode" Mode="In" Type="String" />
+      <Parameter Name="premiumduedate" Mode="In" Type="DateTime" />
+      <Parameter Name="benfitiary" Mode="In" Type="String" />
+      <Parameter Name="owner" Mode="In" Type="String" />
+      <Parameter Name="policyterm" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_deletePolicy">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_getPolicyById" ReturnType="Collection(InsuranceModel.usp_getPolicyById_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_updatePolicies">
+      <Parameter Name="policyno" Mode="In" Type="Int32" />
+      <Parameter Name="planno" Mode="In" Type="Int32" />
+      <Parameter Name="installement" Mode="In" Type="Double" />
+      <Parameter Name="insured" Mode="In" Type="String" />
+      <Parameter Name="sumassured" Mode="In" Type="Double" />
+      <Parameter Name="policystatus" Mode="In" Type="String" />
+      <Parameter Name="premiummode" Mode="In" Type="String" />
+      <Parameter Name="premiumduedate" Mode="In" Type="DateTime" />
+      <Parameter Name="benfitiary" Mode="In" Type="String" />
+      <Parameter Name="owner" Mode="In" Type="String" />
+      <Parameter Name="policyterm" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="usp_createPolicies_Result">
+    <Property Type="Int32" Name="PolicyNumber" Nullable="false" />
+    <Property Type="Int32" Name="PlanNumber" Nullable="true" />
+    <Property Type="Double" Name="InstallementPremium" Nullable="true" />
+    <Property Type="String" Name="Insured" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="SumAssured" Nullable="true" />
+    <Property Type="String" Name="PolicyStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="PremiumMode" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="PremiumDueDate" Nullable="true" />
+    <Property Type="String" Name="Beneficiary" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PolicyTerm" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="usp_getPolicies_Result">
+    <Property Type="Int32" Name="PolicyNumber" Nullable="false" />
+    <Property Type="Int32" Name="PlanNumber" Nullable="true" />
+    <Property Type="Double" Name="InstallementPremium" Nullable="true" />
+    <Property Type="String" Name="Insured" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="SumAssured" Nullable="true" />
+    <Property Type="String" Name="PolicyStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="PremiumMode" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="PremiumDueDate" Nullable="true" />
+    <Property Type="String" Name="Beneficiary" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PolicyTerm" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="usp_getPolicyById_Result">
+    <Property Type="Int32" Name="PolicyNumber" Nullable="false" />
+    <Property Type="Int32" Name="PlanNumber" Nullable="true" />
+    <Property Type="Double" Name="InstallementPremium" Nullable="true" />
+    <Property Type="String" Name="Insured" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="SumAssured" Nullable="true" />
+    <Property Type="String" Name="PolicyStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="PremiumMode" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="PremiumDueDate" Nullable="true" />
+    <Property Type="String" Name="Beneficiary" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PolicyTerm" Nullable="true" MaxLength="10" />
+  </ComplexType>
 </Schema>

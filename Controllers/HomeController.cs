@@ -27,5 +27,31 @@ namespace Insurance.Controllers
 
             return View();
         }
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+            //return RedirectToAction("AddDetails","Policies");
+        }
+
+        [HttpPost]
+        public ActionResult Login(string userName, string password)
+        {
+            if(userName.Equals("Admin") && password.Equals("Admin@123"))
+            {
+                Session["UserName"] = userName;
+                return RedirectToAction("AddDetails", "Policies");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Remove("UserName");
+            return RedirectToAction("Index","Home");
+        }
     }
 }

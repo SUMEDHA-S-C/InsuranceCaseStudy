@@ -72,27 +72,47 @@
     <Parameter Name="dob" Type="date" Mode="In" />
     <Parameter Name="participantTypeNo" Type="int" Mode="In" />
   </Function>
-  <Function Name="usp_beneficiary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="usp_insured" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="usp_owner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="USP_POLOCIES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="usp_addPolicies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="policyno" Type="int" Mode="In" />
-    <Parameter Name="planno" Type="varchar" Mode="In" />
+    <Parameter Name="planno" Type="int" Mode="In" />
     <Parameter Name="installement" Type="float" Mode="In" />
     <Parameter Name="insured" Type="varchar" Mode="In" />
-    <Parameter Name="assured" Type="float" Mode="In" />
-    <Parameter Name="status" Type="varchar" Mode="In" />
-    <Parameter Name="mode" Type="varchar" Mode="In" />
-    <Parameter Name="due" Type="date" Mode="In" />
-    <Parameter Name="benfit" Type="varchar" Mode="In" />
-    <Parameter Name="Action" Type="varchar" Mode="In" />
+    <Parameter Name="sumassured" Type="float" Mode="In" />
+    <Parameter Name="policystatus" Type="varchar" Mode="In" />
+    <Parameter Name="premiummode" Type="varchar" Mode="In" />
+    <Parameter Name="premiumduedate" Type="date" Mode="In" />
+    <Parameter Name="benfitiary" Type="varchar" Mode="In" />
+    <Parameter Name="owner" Type="varchar" Mode="In" />
+    <Parameter Name="policyterm" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="usp_beneficiary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_deletePolicy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_getPolicyById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_insured" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_owner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="usp_updateParticipantDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="firstname" Type="varchar" Mode="In" />
     <Parameter Name="lastname" Type="varchar" Mode="In" />
     <Parameter Name="middlename" Type="varchar" Mode="In" />
     <Parameter Name="dob" Type="date" Mode="In" />
     <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_updatePolicies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="policyno" Type="int" Mode="In" />
+    <Parameter Name="planno" Type="int" Mode="In" />
+    <Parameter Name="installement" Type="float" Mode="In" />
+    <Parameter Name="insured" Type="varchar" Mode="In" />
+    <Parameter Name="sumassured" Type="float" Mode="In" />
+    <Parameter Name="policystatus" Type="varchar" Mode="In" />
+    <Parameter Name="premiummode" Type="varchar" Mode="In" />
+    <Parameter Name="premiumduedate" Type="date" Mode="In" />
+    <Parameter Name="benfitiary" Type="varchar" Mode="In" />
+    <Parameter Name="owner" Type="varchar" Mode="In" />
+    <Parameter Name="policyterm" Type="varchar" Mode="In" />
   </Function>
   <Function Name="usp_viewParticipant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="InsuranceModelStoreContainer">

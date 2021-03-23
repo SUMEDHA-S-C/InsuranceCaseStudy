@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<form method="post">
+    <div class="wrapper">
+        <img src="~/Images/login.jpg" id="login-img"/>
+        <h2 class="form-title">Admin Login</h2>
+        <div class="mb-3 row">
+            <label for="UserName" class="col-sm-2 col-form-label control-label">UserName</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="staticEmail" name="UserName">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Password" class="col-sm-2 col-form-label control-label">Password</label>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" id="inputPassword" name="Password">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class=" col-sm-8">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>

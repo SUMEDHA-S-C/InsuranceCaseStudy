@@ -1,16 +1,98 @@
 ﻿body {
-    background: #28527a;
+    /*background: #28527a;*/
+    background-image: url('../Content/images/banner.jpg');
     color: #fff;
 }
 
+/* header */
+header h1,
+footer h2 {
+    line-height: 0;
+}
+
+.navbar-light {
+    padding: 0.4em 5em;
+    position: absolute;
+    z-index: 999;
+    width: 80%;
+    left: 10%;
+    top: 4%;
+    background: #0093d0;
+    border-radius: 70px;
+    
+}
+
+a.navbar-brand {
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 0.7em;
+    letter-spacing: 1px;
+}
+
+    a.navbar-brand i {
+        color: rgba(0, 0, 0, 0.18);
+        font-size: 2em;
+    }
+
+.navbar-light .navbar-nav .nav-link {
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #fff;
+    padding: 4px 15px;
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -o-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    
+}
+
+ul.navbar-nav.ml-lg-auto.text-center {
+    margin-top: 10px;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .show > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .nav-link.active {
+    color: #0093d0;
+    background: #fff;
+    border-radius: 5px;
+}
+
+
+.w3ls-btn {
+    font-weight: 600;
+    background: transparent;
+    padding: 4px 15px;
+    letter-spacing: 1px;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+    .w3ls-btn i {
+        font-size: 1.8em;
+        color: #fff;
+    }
+
+#navbarSupportedContent {
+    margin-left: 550px;
+}
+/*-- //header --*/
+/*AddDetails and Update*/
 .form-title {
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .wrapper{
     width: 50%;
-    margin: 50px auto;
-    background: rgba(0, 0, 0, 0.2);
+    margin: 130px auto;
+    background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
 }
@@ -24,20 +106,58 @@
     width: 97%;
 }
 
-.report-content {
+/*ThankYou.cshtml*/
+.card {
     display: inline-block;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
+    margin: 150px 600px;
 }
 
+    .card img{
+        height: 100px;
+        width: 100px;
+        border-radius: 100%;
+        margin-left: 80px;
+    }
 
-.bg-color{
-    background: #ccc;
-}
+    .card-title{
+        text-align: center;
+    }
+    /*Thank you.cshtml end*/
+    .bg-color {
+        background: #ccc;
+    }
 
 #icon {
     height: 50px;
     width: 75px;
     padding:0;
 }
+
+a{
+    color:#fff;
+}
+
+/*ShowDetails*/
+.table-class {
+    width: 90%;
+    background: rgba(0, 0, 0, 0.7);
+    margin: 130px auto !important;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.table-class h2{
+    text-align: center;
+}
+
+/*Login page*/
+#login-img{
+    height:100px;
+    width: 100px;
+    border-radius: 100%;
+    margin-left: 300px;
+}
+/*Login page ends here*/

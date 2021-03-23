@@ -3,40 +3,84 @@
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
-    @{
-        double sumAuured = @Convert.ToDouble(@Session["sumAssured"]);
-        int term = Convert.ToInt32(Session["policyTerm"]);
-        int planNumber = Convert.ToInt32(Session["PlanNumber"]);
-        string owner = Session["owner"].ToString();
-        string insured = Session["insured"].ToString();
-        string benificiary = Session["benificiary"].ToString();
-        double installmentPremium = Convert.ToDouble(Session["premium"]);
+@{
+    double sumAuured = @Convert.ToDouble(@Session["sumAssured"]);
+    int term = Convert.ToInt32(Session["policyTerm"]);
+    int planNumber = Convert.ToInt32(Session["PlanNumber"]);
+    string owner = Session["owner"].ToString();
+    string insured = Session["insured"].ToString();
+    string benificiary = Session["benificiary"].ToString();
+    double installmentPremium = Convert.ToDouble(Session["premium"]);
 
-        double bonus = 0.0;
-        double maturityAmount = 0.0;
-        double deathBenifit = 0.0;
-    }
+    double bonus = 0.0;
+    double maturityAmount = 0.0;
+    double deathBenifit = 0.0;
+}
 
-    @if (planNumber == 1)
-    {
-        bonus = sumAuured * 0.03 * term;
-        maturityAmount = sumAuured + bonus;
-        deathBenifit = sumAuured;
-    }
+@if (planNumber == 1)
+{
+    bonus = sumAuured * 0.03 * term;
+    maturityAmount = sumAuured + bonus;
+    deathBenifit = sumAuured;
+}
 
-    else if (planNumber == 2)
-    {
-        maturityAmount = sumAuured;
-        deathBenifit = sumAuured * 2;
-    }
-    <div class="report-content">
-        <h2>Insurance Report</h2>
-        <hr />
-        <p>Owner : @owner</p>
-        <p>Insured : @insured</p>
-        <p>Benificiary : @benificiary</p>
-        <p>Installment Premium : INR @installmentPremium/-</p>
-        <p>Maturity value : INR @maturityAmount/-</p>
-        <p>Death Benifit : .INR @deathBenifit/-</p>
+else if (planNumber == 2)
+{
+    maturityAmount = sumAuured;
+    deathBenifit = sumAuured * 2;
+}
+<nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary">
+    <h1>
+        <a class="navbar-brand text-white" href="#home">
+            Insurance
+        </a>
+    </h1>
+    <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-lg-auto text-center">
+            <li class="nav-item active  mr-lg-3 mt-lg-0 mt-3">
+                <a class="nav-link" href="#home">
+                    Home
+                    @*<span class="sr-only">(current)</span>*@
+                </a>
+            </li>
+
+            <li class="nav-item mr-lg-3 mt-lg-0 mt-3">
+                <a class="nav-link scroll" href="ShowDetails">Show Details</a>
+            </li>
+
+            <li class="nav-item mr-lg-3 mt-lg-0 mt-3">
+                <a class="nav-link scroll" href="~/Home/Index">Logout</a>
+            </li>
+
+        </ul>
     </div>
+
+</nav>
+<!--<div class="report-content">
+    <h2>Insurance Report</h2>
+    <hr />
+    <p>Owner : @owner</p>
+    <p>Insured : @insured</p>
+    <p>Benificiary : @benificiary</p>
+    <p>Installment Premium : INR @installmentPremium/-</p>
+    <p>Maturity value : INR @maturityAmount/-</p>
+    <p>Death Benifit : .INR @deathBenifit/-</p>-->
+    @*@Html.ActionLink("View Details", "ShowDetails")*@
+<!--</div>-->
+<div class="card" style="width: 19rem;">
+    <img src="~/Images/personIcon.jpg" class="card-img-top" alt="img">
+    
+    <div class="card-body">
+        <h5 class="card-title">@owner</h5>
+        <hr />
+        <p class="card-text">Installment Premium : INR @installmentPremium/-</p>
+        <p class="card-text">Maturity value : INR @maturityAmount/-</p>
+        <p class="card-text">Death Benifit : .INR @deathBenifit/-</p>
+        @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+    </div>
+</div>
 

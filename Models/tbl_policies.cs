@@ -16,16 +16,12 @@ namespace Insurance.Models
     public partial class tbl_policies
     {
         public int PolicyNumber { get; set; }
-
-        [Required(ErrorMessage = "Plan Number is required.")]
         public Nullable<int> PlanNumber { get; set; }
 
-        [Required(ErrorMessage = "Installment Premium is required.")]
-        [Display(Name ="Installment Premium")]
-        //How much amount one need to pay for single premium
+        [Required]
         public Nullable<double> InstallementPremium { get; set; }
 
-        [Required(ErrorMessage ="Isured is Required.")]
+        [Required]
         public string Insured { get; set; }
 
         [Required]
@@ -38,6 +34,7 @@ namespace Insurance.Models
         public string PremiumMode { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> PremiumDueDate { get; set; }
 
         [Required]

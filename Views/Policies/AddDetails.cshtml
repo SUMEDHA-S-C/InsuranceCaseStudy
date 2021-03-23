@@ -4,12 +4,43 @@
 }
 
 
+@if (Session["UserName"] != null)
+{
+    <nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary">
+        <h1>
+            <a class="navbar-brand text-white" href="#home">
+                Insurance
+            </a>
+        </h1>
+        <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-lg-auto text-center">
+                <li class="nav-item active  mr-lg-3 mt-lg-0 mt-3">
+                    <a class="nav-link" href="#home">
+                        Home
+                        @*<span class="sr-only">(current)</span>*@
+                    </a>
+                </li>
+                <li class="nav-item  mr-lg-3 mt-lg-0 mt-3">
+                    <a class="nav-link scroll" href="ShowDetails">Show Details</a>
+                </li>
+
+                <li class="nav-item mr-lg-3 mt-lg-0 mt-3">
+                    <a class="nav-link scroll" href="~/Home/Index">Logout</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </nav>
     <div>
         <form method="post">
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <h2 class="form-title">Your Insurance</h2>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="wrapper">
                     <div class="row">
@@ -45,7 +76,7 @@
                                 <select name="PremiumMode" id="mode" class="form-select" onblur="calculatePremium();">
                                     <option value="null">--select--</option>
                                     <option value="Yearly">Yearly</option>
-                                    <option value="Half-Yearly">Half-Yearly</option>
+                                    <option value="HalfYearly">Half_Yearly</option>
                                     <option value="Quaterly">Quaterly</option>
                                     <option value="Monthly">Monthly</option>
                                 </select>
@@ -93,7 +124,8 @@
                         <div class="form-group col-md-6">
                             @Html.LabelFor(model => model.PremiumDueDate, htmlAttributes: new { @class = "control-label" })
                             <div>
-                                @Html.EditorFor(model => model.PremiumDueDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                @*@Html.EditorFor(model => model.PremiumDueDate, new { htmlAttributes = new { @class = "form-control", @id="date"} })*@
+                                <input type="text" name="PremiumDueDate" class="form-control" id="date" />
                                 @Html.ValidationMessageFor(model => model.PremiumDueDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -101,7 +133,11 @@
                         <div class="form-group col-md-6">
                             @Html.LabelFor(model => model.PolicyStatus, htmlAttributes: new { @class = "control-label " })
                             <div>
-                                @Html.EditorFor(model => model.PolicyStatus, new { htmlAttributes = new { @class = "form-control" } })
+                                <select name="PolicyStatus" class="form-select">
+                                    <option value="null">--Select--</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
                                 @Html.ValidationMessageFor(model => model.PolicyStatus, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -114,3 +150,4 @@
             </div>
         </form>
     </div>
+}

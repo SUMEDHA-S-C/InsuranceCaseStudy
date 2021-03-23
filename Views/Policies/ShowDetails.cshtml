@@ -1,33 +1,134 @@
-﻿@model IEnumerable<Insurance.Models.tbl_policyType>
+﻿@model IEnumerable<Insurance.Models.tbl_policies>
 
 @{
     ViewBag.Title = "ShowDetails";
+    Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
-<h2>ShowDetails</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PolicyName)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PolicyName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PlanNumber }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PlanNumber }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PlanNumber })
-        </td>
-    </tr>
+@if (Session["UserName"] != null)
+{
+    <nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary">
+        <h1>
+            <a class="navbar-brand text-white" href="#home">
+                Insurance
+            </a>
+        </h1>
+        <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-lg-auto text-center">
+                <li class="nav-item active  mr-lg-3 mt-lg-0 mt-3">
+                    <a class="nav-link" href="#home">
+                        Home
+                        @*<span class="sr-only">(current)</span>*@
+                    </a>
+                </li>
+
+                <li class="nav-item mr-lg-3 mt-lg-0 mt-3">
+                    <a class="nav-link scroll" href="AddDetails">Add Details</a>
+                </li>
+
+                <li class="nav-item mr-lg-3 mt-lg-0 mt-3">
+                    <a class="nav-link scroll" href="~/Home/Index">Logout</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </nav>
+    <div class="table-class">
+
+        <table class="table text-light">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.InstallementPremium)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Insured)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SumAssured)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PolicyStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PremiumMode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PremiumDueDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Beneficiary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Owner)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PolicyTerm)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tbl_policyType.PolicyName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InstallementPremium)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Insured)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SumAssured)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PolicyStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PremiumMode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PremiumDueDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Beneficiary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Owner)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PolicyTerm)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbl_policyType.PolicyName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Update", new { id = item.PolicyNumber }) |
+                        @*@Html.ActionLink("Details", "Details", new { id=item.PolicyNumber }) |*@
+                        @{ if (item.PolicyStatus == "Inactive")
+                            {
+                                @Html.ActionLink("Delete", "Delete", new { id = item.PolicyNumber }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                            }
+
+                            @*else
+                                {
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.PolicyNumber }, new { disabled = true })
+
+                                }*@
+                        }
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
 }
-
-</table>

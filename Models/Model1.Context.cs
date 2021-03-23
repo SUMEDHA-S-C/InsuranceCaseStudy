@@ -146,5 +146,148 @@ namespace Insurance.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_owner");
         }
+    
+        public virtual ObjectResult<usp_createPolicies_Result> usp_createPolicies(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_createPolicies_Result>("usp_createPolicies", idParameter);
+        }
+    
+        public virtual int usp_deletePolicies(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_deletePolicies", idParameter);
+        }
+    
+        public virtual ObjectResult<usp_getPolicies_Result> usp_getPolicies(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_getPolicies_Result>("usp_getPolicies", idParameter);
+        }
+    
+        public virtual int usp_addPolicies(Nullable<int> policyno, Nullable<int> planno, Nullable<double> installement, string insured, Nullable<double> sumassured, string policystatus, string premiummode, Nullable<System.DateTime> premiumduedate, string benfitiary, string owner, string policyterm)
+        {
+            var policynoParameter = policyno.HasValue ?
+                new ObjectParameter("policyno", policyno) :
+                new ObjectParameter("policyno", typeof(int));
+    
+            var plannoParameter = planno.HasValue ?
+                new ObjectParameter("planno", planno) :
+                new ObjectParameter("planno", typeof(int));
+    
+            var installementParameter = installement.HasValue ?
+                new ObjectParameter("installement", installement) :
+                new ObjectParameter("installement", typeof(double));
+    
+            var insuredParameter = insured != null ?
+                new ObjectParameter("insured", insured) :
+                new ObjectParameter("insured", typeof(string));
+    
+            var sumassuredParameter = sumassured.HasValue ?
+                new ObjectParameter("sumassured", sumassured) :
+                new ObjectParameter("sumassured", typeof(double));
+    
+            var policystatusParameter = policystatus != null ?
+                new ObjectParameter("policystatus", policystatus) :
+                new ObjectParameter("policystatus", typeof(string));
+    
+            var premiummodeParameter = premiummode != null ?
+                new ObjectParameter("premiummode", premiummode) :
+                new ObjectParameter("premiummode", typeof(string));
+    
+            var premiumduedateParameter = premiumduedate.HasValue ?
+                new ObjectParameter("premiumduedate", premiumduedate) :
+                new ObjectParameter("premiumduedate", typeof(System.DateTime));
+    
+            var benfitiaryParameter = benfitiary != null ?
+                new ObjectParameter("benfitiary", benfitiary) :
+                new ObjectParameter("benfitiary", typeof(string));
+    
+            var ownerParameter = owner != null ?
+                new ObjectParameter("owner", owner) :
+                new ObjectParameter("owner", typeof(string));
+    
+            var policytermParameter = policyterm != null ?
+                new ObjectParameter("policyterm", policyterm) :
+                new ObjectParameter("policyterm", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_addPolicies", policynoParameter, plannoParameter, installementParameter, insuredParameter, sumassuredParameter, policystatusParameter, premiummodeParameter, premiumduedateParameter, benfitiaryParameter, ownerParameter, policytermParameter);
+        }
+    
+        public virtual int usp_deletePolicy(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_deletePolicy", idParameter);
+        }
+    
+        public virtual ObjectResult<usp_getPolicyById_Result> usp_getPolicyById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_getPolicyById_Result>("usp_getPolicyById", idParameter);
+        }
+    
+        public virtual int usp_updatePolicies(Nullable<int> policyno, Nullable<int> planno, Nullable<double> installement, string insured, Nullable<double> sumassured, string policystatus, string premiummode, Nullable<System.DateTime> premiumduedate, string benfitiary, string owner, string policyterm)
+        {
+            var policynoParameter = policyno.HasValue ?
+                new ObjectParameter("policyno", policyno) :
+                new ObjectParameter("policyno", typeof(int));
+    
+            var plannoParameter = planno.HasValue ?
+                new ObjectParameter("planno", planno) :
+                new ObjectParameter("planno", typeof(int));
+    
+            var installementParameter = installement.HasValue ?
+                new ObjectParameter("installement", installement) :
+                new ObjectParameter("installement", typeof(double));
+    
+            var insuredParameter = insured != null ?
+                new ObjectParameter("insured", insured) :
+                new ObjectParameter("insured", typeof(string));
+    
+            var sumassuredParameter = sumassured.HasValue ?
+                new ObjectParameter("sumassured", sumassured) :
+                new ObjectParameter("sumassured", typeof(double));
+    
+            var policystatusParameter = policystatus != null ?
+                new ObjectParameter("policystatus", policystatus) :
+                new ObjectParameter("policystatus", typeof(string));
+    
+            var premiummodeParameter = premiummode != null ?
+                new ObjectParameter("premiummode", premiummode) :
+                new ObjectParameter("premiummode", typeof(string));
+    
+            var premiumduedateParameter = premiumduedate.HasValue ?
+                new ObjectParameter("premiumduedate", premiumduedate) :
+                new ObjectParameter("premiumduedate", typeof(System.DateTime));
+    
+            var benfitiaryParameter = benfitiary != null ?
+                new ObjectParameter("benfitiary", benfitiary) :
+                new ObjectParameter("benfitiary", typeof(string));
+    
+            var ownerParameter = owner != null ?
+                new ObjectParameter("owner", owner) :
+                new ObjectParameter("owner", typeof(string));
+    
+            var policytermParameter = policyterm != null ?
+                new ObjectParameter("policyterm", policyterm) :
+                new ObjectParameter("policyterm", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_updatePolicies", policynoParameter, plannoParameter, installementParameter, insuredParameter, sumassuredParameter, policystatusParameter, premiummodeParameter, premiumduedateParameter, benfitiaryParameter, ownerParameter, policytermParameter);
+        }
     }
 }
